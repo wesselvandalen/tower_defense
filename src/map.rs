@@ -15,4 +15,8 @@ impl Map {
             towers: Vec::new(),
         }
     }
+
+    pub fn set_path(&mut self, path: Vec<(usize, usize)>) {
+        self.path = path;
+    }
 }
