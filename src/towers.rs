@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub enum Tower {
     WaterTower(Stats),
     FireTower(Stats)
@@ -17,6 +18,7 @@ impl Tower {
     // fire, lighting
 }
 
+#[derive(Debug)]
 pub struct Stats {
     damage  : usize,
     speed   : usize,

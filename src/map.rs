@@ -1,5 +1,6 @@
 use crate::towers::Tower;
 
+#[derive(Debug)]
 pub struct Map {
     size: (usize, usize),
     path: Vec<(usize, usize)>,
