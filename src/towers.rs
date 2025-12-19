@@ -1,5 +1,16 @@
 pub enum Tower {
-    BasicMonkey(Stats)
+    BasicMonkey(Stats),
+    FireTower(Stats)
+}
+
+impl Tower {
+    pub fn new_fire_tower() -> Tower {
+        Tower::FireTower((Stats { damage: 16, speed: 1 }))
+    }
+
+
+
+    // fire, lighting
 }
 
 pub struct Stats {
