@@ -1,11 +1,15 @@
 pub enum Tower {
-    BasicMonkey(Stats),
+    WaterTower(Stats),
     FireTower(Stats)
 }
 
 impl Tower {
-    pub fn new_fire_tower() -> Tower {
-        Tower::FireTower((Stats { damage: 16, speed: 1 }))
+    pub fn new_water_tower() -> Self {
+        Self::WaterTower(Stats::new(10, 2))
+    }
+
+    pub fn new_fire_tower() -> Self {
+        Self::FireTower(Stats::new(16, 1))
     }
 
 
@@ -19,6 +23,10 @@ pub struct Stats {
 }
 
 impl Stats {
+    pub fn new(damage: usize, speed: usize) -> Self {
+        Self { damage, speed }
+    }
+    
     pub fn level_up(&mut self) {
         self.damage += 10;
         self.speed += 1;
