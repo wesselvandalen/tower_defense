@@ -62,7 +62,6 @@ impl Map {
         let foreground = Color::Green;
         queue!(
             stdout,
-            Clear(ClearType::All),
             SetBackgroundColor(background),
             SetForegroundColor(foreground),
         )?;
