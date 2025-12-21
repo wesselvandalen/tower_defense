@@ -1,7 +1,7 @@
 use std::io::{Write, Stdout};
 use std::io::Result as IOResult;
 
-use crossterm::queue;
+use crossterm::{queue, QueueableCommand};
 use crossterm::terminal::{size};
 use crossterm::cursor::MoveTo;
 use crossterm::style::{
@@ -10,6 +10,9 @@ use crossterm::style::{
     SetBackgroundColor,
     SetForegroundColor
 };
+
+use crate::towers::Tower;
+use crate::PrintLines;
 
 /// The information margin at the right of the screen
 /// 
@@ -90,8 +93,27 @@ impl Margin {
             Print(format!("Money : {}", self.user_money)),
         )?;
 
+        
+        // Draw all towers
+        self.draw_towers(stdout)?;
 
         stdout.flush()?;
+        Ok(())
+    }
+
+
+    /// Draws all the tower types in the margin
+    /// 
+    fn draw_towers(&self, stdout: &mut Stdout) -> IOResult<()> {
+        let (stdout_x, _) = size()?;
+        let x = stdout_x - self.width + 7;
+        stdout.queue(MoveTo(x, 4))?;
+
+        for tower in Tower::iter_all_towers() {
+            let s = Tower::to_print_str(&tower);
+            stdout.queue(PrintLines(&s))?;
+        }
+
         Ok(())
     }
     
