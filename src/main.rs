@@ -18,7 +18,7 @@ use crossterm::terminal::{
     Clear, 
     ClearType
 };
-use crossterm::cursor::Hide;
+use crossterm::cursor::{Hide, MoveTo};
 use crossterm::event::{
     self, 
     Event,
@@ -26,6 +26,7 @@ use crossterm::event::{
     KeyModifiers,
 };
 use crossterm::style::{
+    Print,
     SetBackgroundColor,
     SetForegroundColor,
     Color,
@@ -105,4 +106,20 @@ fn close_program(terminal: &mut Stdout) -> IOResult<()> {
     )?;
 
     panic!();
+}
+
+
+/// Queues the print command to print a string, but it handles newline (\n) better
+/// 
+pub fn print_lines(stdout: &mut Stdout, s: &str) -> IOResult<()> {
+    for line in s.lines() {
+        queue!(
+            stdout,
+            Print(line),
+            cursor::MoveDown(1),
+            cursor::MoveLeft(line.len() as u16)
+        )?
+    }
+
+    Ok(())
 }
