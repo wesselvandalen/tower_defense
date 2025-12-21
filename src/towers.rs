@@ -56,14 +56,14 @@ impl Tower {
 /// Iterates over all types of towers
 /// 
 pub struct IterAllTowers {
-    curr: Tower
+    curr: Option<Tower>
 }
 
 impl IterAllTowers {
     /// Creates a new instance of this iterator
     /// 
     fn new() -> Self {
-        Self{ curr: Tower::new_fire_tower() }
+        Self{ curr: Some(Tower::new_fire_tower()) }
     }
 }
 
@@ -72,12 +72,14 @@ use std::iter::Iterator;
 impl Iterator for IterAllTowers {
     type Item = Tower;
     fn next(&mut self) -> Option<Self::Item> {
-        let res = self.curr.clone();
-        match self.curr {
-            Tower::FireTower(_)  => self.curr = Tower::new_water_tower(),
-            Tower::WaterTower(_) => return None
-        }
+        if self.curr.is_none() {return None}
 
+        let res = self.curr.clone().unwrap();
+        match res {
+            Tower::FireTower(_) => self.curr = Some(Tower::new_water_tower()),
+            Tower::WaterTower(_) => self.curr = None,
+        }
+        
         Some(res)
     }
 }
