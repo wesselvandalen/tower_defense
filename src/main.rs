@@ -64,6 +64,13 @@ fn main() -> IOResult<()> {
             // Draw margin on screen
             margin.draw(&mut terminal)?;
 
+            queue!(
+                terminal,
+                MoveTo(50, 20),
+                PrintLines("test1\ntest2")
+            )?;
+
+            terminal.flush()?;
             last_draw = Instant::now();
         }
     }
@@ -111,15 +118,17 @@ fn close_program(terminal: &mut Stdout) -> IOResult<()> {
 
 /// Queues the print command to print a string, but it handles newline (\n) better
 /// 
-pub fn print_lines(stdout: &mut Stdout, s: &str) -> IOResult<()> {
-    for line in s.lines() {
-        queue!(
-            stdout,
-            Print(line),
-            cursor::MoveDown(1),
-            cursor::MoveLeft(line.len() as u16)
-        )?
-    }
+pub struct PrintLines<'a>(&'a str);
 
-    Ok(())
+use crossterm::Command;
+impl<'a> Command for PrintLines<'a> {
+    fn write_ansi(&self, f: &mut impl core::fmt::Write) -> core::fmt::Result {
+        for line in self.0.lines() {
+            Print(line).write_ansi(f)?;
+            cursor::MoveDown(1).write_ansi(f)?;
+            cursor::MoveLeft(line.len() as u16).write_ansi(f)?;
+        }
+        
+        Ok(())
+    }
 }
