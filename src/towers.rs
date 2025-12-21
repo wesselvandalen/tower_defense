@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Tower {
     WaterTower(Stats),
     FireTower(Stats)
@@ -43,11 +43,48 @@ impl Tower {
         + "│ ~ │\n"
         + "└───┘\n"
     }
+
+
+    /// Creates an iterator that iterates over all types of towers
+    /// 
+    pub fn iter_all_towers() -> IterAllTowers {
+        IterAllTowers::new()
+    }
+}
+
+
+/// Iterates over all types of towers
+/// 
+pub struct IterAllTowers {
+    curr: Tower
+}
+
+impl IterAllTowers {
+    /// Creates a new instance of this iterator
+    /// 
+    fn new() -> Self {
+        Self{ curr: Tower::new_fire_tower() }
+    }
+}
+
+
+use std::iter::Iterator;
+impl Iterator for IterAllTowers {
+    type Item = Tower;
+    fn next(&mut self) -> Option<Self::Item> {
+        let res = self.curr.clone();
+        match self.curr {
+            Tower::FireTower(_)  => self.curr = Tower::new_water_tower(),
+            Tower::WaterTower(_) => return None
+        }
+
+        Some(res)
+    }
 }
 
 
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Stats {
     damage  : usize,
     speed   : usize,
