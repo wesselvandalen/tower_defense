@@ -64,13 +64,6 @@ fn main() -> IOResult<()> {
             // Draw margin on screen
             margin.draw(&mut terminal)?;
 
-            queue!(
-                terminal,
-                MoveTo(50, 20),
-                PrintLines("test1\ntest2")
-            )?;
-
-            terminal.flush()?;
             last_draw = Instant::now();
         }
     }
