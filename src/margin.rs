@@ -96,7 +96,7 @@ impl Margin {
         // Draw all towers
         self.draw_towers(stdout)?;
 
-        //stdout.flush()?;
+        stdout.flush()?;
         Ok(())
     }
 
