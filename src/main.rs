@@ -65,6 +65,7 @@ fn main() -> IOResult<()> {
             // Draw margin on screen
             margin.draw(&mut terminal)?;
 
+            terminal.flush()?;
             execute!(terminal, terminal::EndSynchronizedUpdate)?;
             last_draw = Instant::now();
         }

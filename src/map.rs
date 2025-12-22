@@ -86,7 +86,7 @@ impl Map {
             )?;
         }
 
-        stdout.flush()?;
+        //stdout.flush()?;
         Ok(())
     }
 

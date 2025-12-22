@@ -84,7 +84,7 @@ impl Tower {
             PrintLines(&s),
         )?;
 
-        stdout.flush()?;
+        //stdout.flush()?;
         Ok(())
     }
 
@@ -103,7 +103,7 @@ impl Tower {
             PrintLines(&s),
         )?;
 
-        stdout.flush()?;
+        //stdout.flush()?;
         Ok(())
     }
 
