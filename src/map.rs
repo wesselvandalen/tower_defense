@@ -71,8 +71,8 @@ impl Map {
             for y in 0..self.size.1 {
                 queue!(
                     stdout, 
-                    cursor::MoveTo(x, y),
-                    Print("█"),
+                    cursor::MoveTo(x*2, y),
+                    Print("██"),
                 )?;
             }
         }
@@ -83,8 +83,8 @@ impl Map {
         for (x, y) in &self.path {
             queue!(
                 stdout,
-                cursor::MoveTo(*x, *y),
-                Print("█"),
+                cursor::MoveTo(*x*2, *y),
+                Print("██"),
             )?;
         }
 

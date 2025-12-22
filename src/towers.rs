@@ -38,7 +38,7 @@ impl Tower {
     /// Draws fire tower
     /// 
     fn draw_fire_tower(stdout: &mut Stdout) -> IOResult<()> {
-        let s = "".to_string()
+        let s = String::new()
         + "┌───┐\n"
         + "│ ^ │\n"
         + "└───┘\n";
@@ -57,7 +57,7 @@ impl Tower {
     /// Returns the string representation of the water tower
     /// 
     fn draw_water_tower(stdout: &mut Stdout) -> IOResult<()> {
-        let s = "".to_string()
+        let s = String::new()
         + "┌───┐\n"
         + "│ ~ │\n"
         + "└───┘\n";
