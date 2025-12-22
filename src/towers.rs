@@ -16,12 +16,47 @@ pub enum Tower {
 
 
 impl Tower {
+    /// Creates a new water tower
+    /// 
     pub fn new_water_tower() -> Self {
         Self::WaterTower(Stats::new(10, 2, 100))
     }
 
+
+    /// Creates a new fire tower
+    /// 
     pub fn new_fire_tower() -> Self {
         Self::FireTower(Stats::new(16, 1, 150))
+    }
+
+
+    /// Returns the damage of the tower
+    /// 
+    pub fn damage(&self) -> usize {
+        match self {
+            Self::WaterTower(stat) => stat.damage(),
+            Self::FireTower(stat) => stat.damage(),
+        }
+    }
+
+
+    /// Returns the Speed of the tower
+    /// 
+    pub fn speed(&self) -> usize {
+        match self {
+            Self::WaterTower(stat) => stat.speed(),
+            Self::FireTower(stat) => stat.speed(),
+        }
+    }
+
+
+    /// Returns the Cost of the tower
+    /// 
+    pub fn cost(&self) -> usize {
+        match self {
+            Self::WaterTower(stat) => stat.cost(),
+            Self::FireTower(stat) => stat.cost(),
+        }
     }
 
 
@@ -118,7 +153,7 @@ impl Iterator for IterAllTowers {
 pub struct Stats {
     damage  : usize,
     speed   : usize,
-    cost   : usize,
+    cost    : usize,
 }
 
 
