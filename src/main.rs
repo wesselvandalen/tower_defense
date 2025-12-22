@@ -1,6 +1,7 @@
 mod map;
 mod towers;
 mod margin;
+mod monsters;
 
 use towers::*;
 use map::Map;

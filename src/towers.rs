@@ -123,16 +123,18 @@ pub struct Stats {
 
 
 impl Stats {
+    /// Returns a new instance of a Stats given arguments.
+    /// 
     pub fn new(damage: usize, speed: usize, cost: usize) -> Self {
         Self { damage, speed, cost }
     }
     
-
+    /// Levels up the damage and speed of stats.
+    /// 
     pub fn level_up(&mut self) {
         self.damage += 10;
         self.speed += 1;
     }
-
 
     /// Returns the damage of the tower
     /// 
