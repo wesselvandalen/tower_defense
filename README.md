@@ -1,4 +1,4 @@
-<img src="./logo.png" style="max-width: 420px;" />
+<img src="./logo.png" width="420" />
 
 # Tower Defense (in Rust)
 
